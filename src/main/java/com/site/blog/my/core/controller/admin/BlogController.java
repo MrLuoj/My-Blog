@@ -42,7 +42,8 @@ public class BlogController {
     @Resource
     private CategoryService categoryService;
 
-    @GetMapping("/blogs/list")
+    // @GetMapping("/blogs/list")
+    @RequestMapping(value ="/blogs/list",method = RequestMethod.GET)
     @ResponseBody
     public Result list(@RequestParam Map<String, Object> params) {
         if (ObjectUtils.isEmpty(params.get("page")) || ObjectUtils.isEmpty(params.get("limit"))) {
