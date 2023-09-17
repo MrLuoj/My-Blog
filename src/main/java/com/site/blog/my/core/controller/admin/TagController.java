@@ -32,7 +32,8 @@ public class TagController {
         return "admin/tag";
     }
 
-    @GetMapping("/tags/list")
+    // @GetMapping("/tags/list")
+    @RequestMapping(value = "/tags/list", method = RequestMethod.GET)
     @ResponseBody
     public Result list(@RequestParam Map<String, Object> params) {
         if (ObjectUtils.isEmpty(params.get("page")) || ObjectUtils.isEmpty(params.get("limit"))) {

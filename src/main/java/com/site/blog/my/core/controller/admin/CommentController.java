@@ -26,7 +26,8 @@ public class CommentController {
     @Resource
     private CommentService commentService;
 
-    @GetMapping("/comments/list")
+    // @GetMapping("/comments/list")
+    @RequestMapping(value ="/comments/list",method = RequestMethod.GET)
     @ResponseBody
     public Result list(@RequestParam Map<String, Object> params) {
         if (ObjectUtils.isEmpty(params.get("page")) || ObjectUtils.isEmpty(params.get("limit"))) {
