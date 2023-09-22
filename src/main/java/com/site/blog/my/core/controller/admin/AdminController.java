@@ -56,6 +56,8 @@ public class AdminController {
                         @RequestParam("password") String password,
                         @RequestParam("verifyCode") String verifyCode,
                         HttpSession session) {
+    	
+    	// 如果字符串里面的值为null， ""， "   "，那么返回值为false；否则为true
         if (!StringUtils.hasText(verifyCode)) {
             session.setAttribute("errorMsg", "验证码不能为空");
             return "admin/login";
@@ -65,11 +67,14 @@ public class AdminController {
             return "admin/login";
         }
         ShearCaptcha shearCaptcha = (ShearCaptcha) session.getAttribute("verifyCode");
+        String shearCaptchaCode = shearCaptcha.getCode();
         if (shearCaptcha == null || !shearCaptcha.verify(verifyCode)) {
             session.setAttribute("errorMsg", "验证码错误");
             return "admin/login";
         }
         AdminUser adminUser = adminUserService.login(userName, password);
+        
+        //实现登判断,并进行相应的跳转
         if (adminUser != null) {
             session.setAttribute("loginUser", adminUser.getNickName());
             session.setAttribute("loginUserId", adminUser.getAdminUserId());

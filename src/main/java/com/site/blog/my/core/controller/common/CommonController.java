@@ -13,12 +13,22 @@ public class CommonController {
 
     @GetMapping("/common/kaptcha")
     public void defaultKaptcha(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
-        httpServletResponse.setHeader("Cache-Control", "no-store");
+    	// 设置http响应头控制浏览器禁止缓存当前文档内容
+    	
+    	// HTTP1.1通过Cache-Control控制浏览器缓存。
+    	httpServletResponse.setHeader("Cache-Control", "no-store");
+    	
+    	// HTTP1.0通过Pragma控制浏览器缓存。
         httpServletResponse.setHeader("Pragma", "no-cache");
+            
         httpServletResponse.setDateHeader("Expires", 0);
+        // 将响应输出流的内容类型设置为PNG格式的图像数据，告诉浏览器接收到的数据是PNG格式的图像数据，这样浏览器就会根据相应的解码器对图像进行解码显示
         httpServletResponse.setContentType("image/png");
 
+        // 创建扭曲干扰的验证码
         ShearCaptcha shearCaptcha= CaptchaUtil.createShearCaptcha(150, 30, 3, 3);
+        
+        String shearCaptchaCode = shearCaptcha.getCode();
 
         // 验证码存入session
         httpServletRequest.getSession().setAttribute("verifyCode", shearCaptcha);

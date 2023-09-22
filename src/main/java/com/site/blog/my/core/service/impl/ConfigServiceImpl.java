@@ -17,7 +17,7 @@ public class ConfigServiceImpl implements ConfigService {
     @Autowired
     private BlogConfigMapper configMapper;
 
-    public static final String websiteName = "personal blog";
+    public static final String websiteName = "企业级博客";
     public static final String websiteDescription = "personal blog是SpringBoot2+Thymeleaf+Mybatis建造的个人博客网站.SpringBoot实战博客源码.个人博客搭建";
     public static final String websiteLogo = "/admin/dist/img/logo2.png";
     public static final String websiteIcon = "/admin/dist/img/favicon.png";
