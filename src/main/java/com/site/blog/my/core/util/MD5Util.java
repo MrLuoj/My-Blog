@@ -31,11 +31,14 @@ public class MD5Util {
         String resultString = null;
         try {
             resultString = new String(origin);
+            // 将任意长度的消息转换为信息摘要
+            // 使用getInstance()方法创建MessageDigest对象
             MessageDigest md = MessageDigest.getInstance("MD5");
             if (charsetname == null || "".equals(charsetname))
-                resultString = byteArrayToHexString(md.digest(resultString
-                        .getBytes()));
+            	resultString = byteArrayToHexString(md.digest(resultString
+            			.getBytes()));
             else
+            	// String的getBytes()方法是得到一个操作系统默认的编码格式的字节数组
                 resultString = byteArrayToHexString(md.digest(resultString
                         .getBytes(charsetname)));
         } catch (Exception exception) {
